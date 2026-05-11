@@ -132,7 +132,7 @@ pip install -U transformers accelerate peft bitsandbytes unsloth
 # Hugging Face Model
 
 ```text
-mohdmusheer/inferra
+mohd-musheer/inferra
 ```
 
 ---
@@ -154,7 +154,7 @@ model, tokenizer = FastLanguageModel.from_pretrained(
 
 model = PeftModel.from_pretrained(
     model,
-    "mohdmusheer/inferra",
+    "mohd-musheer/inferra",
 )
 
 FastLanguageModel.for_inference(model)
@@ -342,9 +342,9 @@ NVIDIA T4
 # Docker Quick Start
 
 ```bash
-docker pull YOUR_USERNAME/inferra-qwen
+docker pull mohdmusheer/inferra
 
-docker run --gpus all -p 8000:8000 YOUR_USERNAME/inferra-qwen
+docker run --gpus all -p 8000:8000 mohdmusheer/inferra
 ```
 
 ---

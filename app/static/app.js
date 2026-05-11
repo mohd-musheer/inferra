@@ -50,7 +50,14 @@ function renderMarkdown(text) {
     return escapeHtml(text).replace(/\n/g, "<br>");
   }
 
-  const raw = window.marked.parse(text);
+  const raw = window.marked.parse(text, {
+  highlight: function(code, lang) {
+    if (window.hljs) {
+      return hljs.highlightAuto(code).value;
+    }
+    return code;
+  }
+});
   return window.DOMPurify.sanitize(raw, { USE_PROFILES: { html: true } });
 }
 
@@ -108,12 +115,22 @@ function addUserMessage(text) {
   const { content } = createMessage("user");
   content.innerHTML = renderMarkdown(text);
   renderMath(content);
+  if (window.hljs) {
+  content.querySelectorAll("pre code").forEach((el) => {
+    hljs.highlightElement(el);
+  });
+}
 }
 
 function addAssistantMessage(text) {
   const { content } = createMessage("assistant");
   content.innerHTML = renderMarkdown(text);
   renderMath(content);
+  if (window.hljs) {
+  content.querySelectorAll("pre code").forEach((el) => {
+    hljs.highlightElement(el);
+  });
+}
 }
 
 function addThinkingIndicator() {
